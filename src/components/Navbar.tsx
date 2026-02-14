@@ -12,6 +12,8 @@ import ham from "../assets/Icon/hamIcon.svg";
 import CustomMenu from "./Menu";
 import "../data/muckGames";
 const Navbar = () => {
+  const horizontalSizes = { base: "20px", md: "70px" };
+  const horizontalSizesMove = { base: "-20px", md: "-70px" };
   return (
     <Box
       position={"fixed"}
@@ -47,22 +49,28 @@ const Navbar = () => {
       <Box
         position={"absolute"}
         bottom={"-1px"}
-        right={"-70px"}
-        width={"70px"}
+        // right={horizontalSizesMove}
+        // width={horizontalSizes}
+        right="calc((100vw - 100%) / -2)"
+        width="calc((100vw - 100%) / 2)"
         height={"1px"}
-        bgGradient="to-r"
-        gradientFrom="gray.200"
-        gradientTo="transparent"
+        // bgGradient="to-r"
+        // gradientFrom="gray.200"
+        // gradientTo="transparent"
+        bg={"gray.200"}
       />
       <Box
         position={"absolute"}
         bottom={"-1px"}
-        left={"-70px"}
-        width={"70px"}
+        // left={horizontalSizesMove}
+        // width={horizontalSizes}
+        left="calc((100vw - 100%) / -2)"
+        width="calc((100vw - 100%) / 2)"
         height={"1px"}
-        bgGradient="to-l"
-        gradientFrom="gray.200"
-        gradientTo="transparent"
+        bg={"gray.200"}
+        // bgGradient="to-l"
+        // gradientFrom="gray.200"
+        // gradientTo="transparent"
       />
       <Flex
         px={{ base: "10px", md: "20px" }}
