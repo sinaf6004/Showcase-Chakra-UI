@@ -13,8 +13,11 @@ import CustomMenu from "./Menu";
 import "../data/muckGames";
 import { Link } from "react-router-dom";
 const Navbar = () => {
+<<<<<<< HEAD
+=======
   const horizontalSizes = { base: "20px", md: "70px" };
   const horizontalSizesMove = { base: "-20px", md: "-70px" };
+>>>>>>> develop
   return (
     <Box
       position={"fixed"}
