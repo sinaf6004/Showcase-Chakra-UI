@@ -1,0 +1,137 @@
+// src/apiClient.ts
+import axios from "axios";
+
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
+import type {
+  DeleteParams,
+  GetParams,
+  PatchParams,
+  PostParams,
+  PutParams,
+} from "../types/apiTypes";
+import useUserStore from "@/store/userStore/userStore";
+
+export const baseURL = "https://dummyjson.com"; // backend URL
+// export const AUTH_BASE = "/api/v1";
+// export const PROTECTED_BASE = "/api/v1";
+
+const apiClient: AxiosInstance = axios.create({
+  baseURL,
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// const token = useUserStore.getState().token; // ✅ این درسته و باید جایگزین بشه
+
+apiClient.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    // const token = localStorage.getItem("token"); // get JWT from localStorage
+    const token = useUserStore.getState().token;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`; // attach token
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
+apiClient.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error) => {
+    console.error(error);
+    return Promise.reject(error);
+  },
+);
+
+// ✅ GET
+export const getData = async ({ endPoint, headers, params }: GetParams) => {
+  try {
+    const response: AxiosResponse = await apiClient.get(endPoint, {
+      params,
+      headers,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error in getData", error);
+    // CustomToast(getBackendErrorMessage(error), "error");
+  }
+};
+
+// ✅ POST
+export const postData = async ({ endPoint, data, headers }: PostParams) => {
+  try {
+    const response: AxiosResponse = await apiClient.post(endPoint, data, {
+      headers,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error in postData", error);
+    // CustomToast(getBackendErrorMessage(error), "error");
+  }
+};
+
+// ✅ POST image/form-data
+export const postImageData = async ({
+  endPoint,
+  data,
+  headers,
+}: PostParams) => {
+  const isFormData = data instanceof FormData;
+  const requestHeaders: Record<string, string> = { ...(headers || {}) };
+
+  if (isFormData) {
+    delete requestHeaders["Content-Type"];
+  }
+
+  const response = await apiClient.post(endPoint, data, {
+    headers: requestHeaders,
+    transformRequest: [(payload) => payload],
+  });
+
+  return response.data;
+};
+
+// ✅ PATCH
+export const patchData = async ({ endPoint, data, headers }: PatchParams) => {
+  try {
+    const response: AxiosResponse = await apiClient.patch(endPoint, data, {
+      headers,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error in patchData", error);
+    // CustomToast(getBackendErrorMessage(error), "error");
+  }
+};
+
+// ✅ PUT
+export const putData = async ({ endPoint, data }: PutParams) => {
+  try {
+    const response: AxiosResponse = await apiClient.put(endPoint, data);
+    return response.data;
+  } catch (error) {
+    console.error("error in putData", error);
+    // CustomToast(getBackendErrorMessage(error), "error");
+  }
+};
+
+// ✅ DELETE
+export const deleteData = async ({ endPoint, data, headers }: DeleteParams) => {
+  try {
+    const response: AxiosResponse = await apiClient.delete(endPoint, {
+      data,
+      headers,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error in deleteData", error);
+    // CustomToast(getBackendErrorMessage(error), "error");
+  }
+};

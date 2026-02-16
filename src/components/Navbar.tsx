@@ -11,6 +11,7 @@ import sun from "../assets/Icon/sunIcon.svg";
 import ham from "../assets/Icon/hamIcon.svg";
 import CustomMenu from "./Menu";
 import "../data/muckGames";
+import { Link } from "react-router-dom";
 const Navbar = () => {
 <<<<<<< HEAD
 =======
@@ -82,7 +83,15 @@ const Navbar = () => {
         h="full"
         backgroundColor="white"
       >
-        <Image height="1/2" src={logo} />
+        <Flex
+          overflow={"hidden"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Link to={"/"}>
+            <Image m={"auto"} src={logo} objectFit="contain" w={"120px"} />
+          </Link>
+        </Flex>
         <HStack
           h={"full"}
           color={"gray.500"}
@@ -90,18 +99,6 @@ const Navbar = () => {
           display={{ base: "none", md: "flex" }}
           gap={"20px"}
         >
-          {/* <Box
-            cursor={"pointer"}
-            h={"full"}
-            borderWidth={"1px"}
-            borderColor={"transparent"}
-          >
-            <CustomMenu
-              name="Users"
-              items={["Login for Employers", "Login for Employees"]}
-              type={3}
-            />
-          </Box> */}
           <Box
             cursor={"pointer"}
             h={"full"}
