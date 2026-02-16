@@ -10881,6 +10881,7 @@ const muckGames = {
   nofollow_collections: ["stores"],
 };
 const results = muckGames.results;
+export default results;
 console.log(results.length);
 results.map((x) => {
   console.log(x.background_image);

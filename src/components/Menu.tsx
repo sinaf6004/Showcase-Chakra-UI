@@ -36,6 +36,7 @@ const CustomMenu = ({
             m={"auto"}
             flexDir={"column"}
             justifyContent={"center"}
+            
           >
             <Flex alignItems={"center"}>
               <Box>{name}</Box>

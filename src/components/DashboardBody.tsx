@@ -1,6 +1,20 @@
-import { Box, Button, Flex, Image, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  useStatStyles,
+  VStack,
+} from "@chakra-ui/react";
 import phoneImg from "../assets/Img/phone_image.webp";
+import { getCurrentUser } from "@/services/userServices";
+import { useEffect, useState } from "react";
 const DashboardBody = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  useEffect(() => {
+    const current = getCurrentUser();
+    console.log(current);
+  }, []);
   return (
     <Box w={{ base: "95%", md: "85%" }} color={"black"} zIndex={0}>
       <Flex
