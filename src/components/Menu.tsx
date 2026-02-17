@@ -2,6 +2,7 @@ import { Icon, Box, Menu, Portal, Flex } from "@chakra-ui/react";
 import { FiChevronDown } from "react-icons/fi";
 import { useState } from "react";
 import ProductsCard from "./productsCard";
+import { Link } from "react-router-dom";
 
 const CustomMenu = ({
   name,
@@ -36,7 +37,6 @@ const CustomMenu = ({
             m={"auto"}
             flexDir={"column"}
             justifyContent={"center"}
-            
           >
             <Flex alignItems={"center"}>
               <Box>{name}</Box>
@@ -58,7 +58,7 @@ const CustomMenu = ({
                     color={"gray.500"}
                     _hover={{ bg: "gray.200" }}
                   >
-                    {x}
+                    <Link to={"/login"}>{x}</Link>
                   </Menu.Item>
                 ))}
               {type == 2 && <ProductsCard />}
