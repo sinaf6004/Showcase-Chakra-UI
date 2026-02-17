@@ -70,7 +70,7 @@ const LoginPage = () => {
               Submit
             </Button>
             <Button colorPalette={"blue"} onClick={() => getCurrentUser()}>
-              Submit
+              show detail in console
             </Button>
           </Stack>
         </form>
